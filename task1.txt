@@ -1,39 +1,39 @@
-def encrypt(text, shift):
+def encrypt(text, shift_amount):
   result = ""
-  for char in text:
-      if char.isalpha():
-          shift_base = 65 if char.isupper() else 97
-          result += chr((ord(char) - shift_base + shift) % 26 + shift_base)
+  for character in text:
+      if character.isalpha():
+          shift_base = 65 if character.isupper() else 97
+          result += chr((ord(character) - shift_base + shift_amount) % 26 + shift_base)
       else:
-          result += char
+          result += character
   return result
 
-def decrypt(text, shift):
-  return encrypt(text, -shift)
+def decrypt(text, shift_amount):
+  return encrypt(text, -shift_amount)
 
 def main():
   print("Caesar Cipher Encryption/Decryption")
   while True:
-      choice = input("Type 'e' to encrypt, 'd' to decrypt, or 'quit' to exit: ").strip().lower()
-      if choice == 'quit':
+      user_choice = input("Type 'e' to encrypt, 'd' to decrypt, or 'quit' to exit: ").strip().lower()
+      if user_choice == 'quit':
           print("Exiting the program.")
           break
-      if choice not in ['e', 'd']:
+      if user_choice not in ['e', 'd']:
           print("Invalid choice! Please choose 'e', 'd', or 'quit'.")
           continue
 
-      message = input("Enter your message: ").strip()
+      user_message = input("Enter your message: ").strip()
       try:
-          shift = int(input("Enter shift value: ").strip())
+          shift_value = int(input("Enter shift value: ").strip())
       except ValueError:
           print("Invalid shift value! Please enter an integer.")
           continue
 
-      if choice == 'e':
-          encrypted_message = encrypt(message, shift)
+      if user_choice == 'e':
+          encrypted_message = encrypt(user_message, shift_value)
           print(f"Encrypted message: {encrypted_message}")
-      elif choice == 'd':
-          decrypted_message = decrypt(message, shift)
+      elif user_choice == 'd':
+          decrypted_message = decrypt(user_message, shift_value)
           print(f"Decrypted message: {decrypted_message}")
 
 if __name__ == "__main__":
